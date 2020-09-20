@@ -1,0 +1,10 @@
+$mobileLandscape: 480px;
+$tabletPortrait: 768px;
+$tabletLandscape: 992px;
+$laptops: 1200px;
+
+@mixin desktop {
+  @media (min-width: #{$tabletPortrait}) {
+    @content;
+  }
+}
