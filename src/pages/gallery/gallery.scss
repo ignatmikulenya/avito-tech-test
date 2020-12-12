@@ -12,6 +12,6 @@
   @include desktop {
     grid-template-columns: repeat(3, 229px);
     grid-auto-rows: 142px;
-    gap: 30px 20px;
+    column-gap: 20px;
   }
 }
