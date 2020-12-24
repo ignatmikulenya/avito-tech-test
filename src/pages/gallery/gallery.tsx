@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 
 import { IImage } from "../../api-interfaces";
 
-import { Chase } from "../../components";
-
 import { useFetch } from "../../hooks";
 import { imagesService } from "../../services";
 
 import { RequestStatus } from "../../enums";
 
-import { Image, Empty } from "./components";
+import { Image, Empty, Error, Loading } from "./components";
 
 export default function Gallery() {
   const [fetchImages, status, images, error] = useFetch<IImage[]>(
@@ -18,18 +16,18 @@ export default function Gallery() {
 
   useEffect(() => {
     fetchImages();
-  }, []);
+  }, [fetchImages]);
 
   const renderContent = () => {
     switch (status) {
       case RequestStatus.Loading:
-        return <Chase />;
+        return <Loading />;
       case RequestStatus.Susscess:
         if (!images) {
           return <Empty />;
         } else {
           return (
-            <div className="gallery">
+            <div className="gallery__photos">
               {images.map((image) => (
                 <Image key={image.id} image={image} onClick={(image) => {}} />
               ))}
@@ -38,15 +36,14 @@ export default function Gallery() {
         }
       case RequestStatus.Error:
         if (!error) {
-          return <p>NO IMAGES</p>;
+          return <Empty />;
         } else {
-          return <p>{error.message}</p>;
+          return <Error text={error.message} />;
         }
       default:
-        return <p>NO IMAGES</p>;
+        return <Empty />;
     }
   };
 
-  return;
-  // return <div className="gallery">{renderContent()}</div>;
+  return <div className="gallery">{renderContent()}</div>;
 }
