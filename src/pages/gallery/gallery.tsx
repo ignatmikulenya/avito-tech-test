@@ -2,17 +2,20 @@ import React, { useEffect } from "react";
 
 import { IImage } from "../../api-interfaces";
 
-import { useFetch } from "../../hooks";
+import { useFetch, useModal } from "../../hooks";
 import { imagesService } from "../../services";
 
 import { RequestStatus } from "../../enums";
 
+import { Modal } from "../../components";
 import { Image, Empty, Error, Loading } from "./components";
 
 export default function Gallery() {
   const [fetchImages, status, images, error] = useFetch<IImage[]>(
     imagesService.getImages
   );
+
+  const [modalIsOpen, toggleModal] = useModal();
 
   useEffect(() => {
     fetchImages();
@@ -29,17 +32,22 @@ export default function Gallery() {
           return (
             <div className="gallery__photos">
               {images.map((image) => (
-                <Image key={image.id} image={image} onClick={(image) => {}} />
+                <Image
+                  key={image.id}
+                  image={image}
+                  onClick={(image) => {
+                    toggleModal();
+                  }}
+                />
               ))}
+              <Modal isOpen={modalIsOpen} onClose={toggleModal}>
+                <p>It's Modal</p>
+              </Modal>
             </div>
           );
         }
       case RequestStatus.Error:
-        if (!error) {
-          return <Empty />;
-        } else {
-          return <Error text={error.message} />;
-        }
+        return <Error text={error.message} />;
       default:
         return <Empty />;
     }

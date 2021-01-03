@@ -1,12 +1,15 @@
 import { useState, useCallback } from "react";
 
 import { RequestStatus } from "../enums";
+import { DEFAULT_ERROR_MESSAGE } from "../constants";
+
+type TError = Error;
 
 type TUseFetchOutput<TResponse> = [
   () => Promise<void>,
   RequestStatus,
   TResponse | null,
-  Error | null
+  TError
 ];
 
 export const useFetch = <TResponse>(
@@ -17,7 +20,7 @@ export const useFetch = <TResponse>(
   const [response, setResponse] = useState<TResponse | null>(
     initialResponseValue
   );
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<TError>(new Error(DEFAULT_ERROR_MESSAGE));
 
   const execute = useCallback(async () => {
     setStatus(RequestStatus.Loading);
