@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StateWrapper } from "../state-wrapper";
+import { Wrapper } from "../wrapper";
 
 import "./error.scss";
 
@@ -10,8 +10,8 @@ type Props = {
 
 export default function Error({ text }: Props) {
   return (
-    <StateWrapper>
+    <Wrapper>
       <p className="error">{text}</p>
-    </StateWrapper>
+    </Wrapper>
   );
 }

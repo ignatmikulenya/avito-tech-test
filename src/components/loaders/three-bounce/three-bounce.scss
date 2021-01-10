@@ -1,0 +1,30 @@
+.three-bounce {
+  display: flex;
+  align-items: center;
+
+  &__bounce {
+    width: 18px;
+
+    border-radius: 50%;
+
+    animation: bouncedelay 1.4s infinite ease-in-out both;
+  }
+}
+.first-bounce {
+  animation-delay: -0.32s;
+}
+
+.second-bounce {
+  animation-delay: -0.16s;
+}
+
+@keyframes bouncedelay {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}

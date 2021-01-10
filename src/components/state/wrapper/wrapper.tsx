@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 
-import "./state-wrapper.scss";
+import "./wrapper.scss";
 
 const StateWrapper: FC = ({ children }) => {
-  return <div className="state-wrapper">{children}</div>;
+  return <div className="wrapper">{children}</div>;
 };
 
 export default StateWrapper;

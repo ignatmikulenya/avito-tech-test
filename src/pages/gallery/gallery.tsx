@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { IImage } from "../../api-interfaces";
 
@@ -7,8 +7,8 @@ import { imagesService } from "../../services";
 
 import { RequestStatus } from "../../enums";
 
-import { Modal } from "../../components";
-import { Image, Empty, Error, Loading } from "./components";
+import { Modal, Error, Empty, Loading } from "../../components";
+import { Image, Preview } from "./components";
 
 export default function Gallery() {
   const [fetchImages, status, images, error] = useFetch<IImage[]>(
@@ -16,6 +16,8 @@ export default function Gallery() {
   );
 
   const [modalIsOpen, toggleModal] = useModal();
+
+  const [selectedImageId, setImageId] = useState<number | null>(null);
 
   useEffect(() => {
     fetchImages();
@@ -36,12 +38,15 @@ export default function Gallery() {
                   key={image.id}
                   image={image}
                   onClick={(image) => {
+                    setImageId(image.id);
                     toggleModal();
                   }}
                 />
               ))}
               <Modal isOpen={modalIsOpen} onClose={toggleModal}>
-                <p>It's Modal</p>
+                {selectedImageId !== null && (
+                  <Preview imageId={selectedImageId}></Preview>
+                )}
               </Modal>
             </div>
           );

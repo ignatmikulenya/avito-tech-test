@@ -1,13 +1,13 @@
 import React from "react";
 
-import { StateWrapper } from "../state-wrapper";
+import { Wrapper } from "../wrapper";
 
 import "./empty.scss";
 
 export default function Empty() {
   return (
-    <StateWrapper>
+    <Wrapper>
       <p className="empty">NO IMAGES</p>
-    </StateWrapper>
+    </Wrapper>
   );
 }

@@ -1,2 +1,2 @@
-export * from "./http-methods";
+export * from "./resolution";
 export * from "./request-status";
