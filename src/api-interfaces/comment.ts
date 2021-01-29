@@ -3,3 +3,8 @@ export interface IComment {
   date: number;
   text: string;
 }
+
+export interface IUserComment {
+  name: string;
+  comment: string;
+}

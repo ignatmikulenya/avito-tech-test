@@ -1,0 +1,33 @@
+.form-field {
+  &__field {
+    display: block;
+    box-sizing: border-box;
+
+    padding: 8px 12px;
+
+    width: 100%;
+
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+
+    font-size: 14px;
+    line-height: 16px;
+
+    transition: border-color 0.3s ease;
+
+    &::placeholder {
+      color: #cccccc;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #4997d0;
+    }
+  }
+
+  &__helper-text {
+    &--error {
+      color: red;
+    }
+  }
+}

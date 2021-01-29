@@ -5,3 +5,4 @@ export * from "./loaders";
 export * from "./modal";
 export * from "./button";
 export * from "./state";
+export * from "./input";

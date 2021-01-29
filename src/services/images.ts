@@ -1,3 +1,5 @@
+import { IUserComment } from "../api-interfaces";
+
 const imagesServiceSource = "https://boiling-refuge-66454.herokuapp.com/images";
 
 export const imagesService = {
