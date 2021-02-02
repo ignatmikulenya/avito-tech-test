@@ -1,4 +1,7 @@
 .form-field {
+  position: relative;
+  padding-bottom: 16px;
+
   &__field {
     display: block;
     box-sizing: border-box;
@@ -26,6 +29,12 @@
   }
 
   &__helper-text {
+    position: absolute;
+    bottom: 0;
+
+    font-size: 14px;
+    line-height: 16px;
+
     &--error {
       color: red;
     }

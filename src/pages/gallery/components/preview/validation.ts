@@ -1,6 +1,6 @@
-import * as yup from "yup";
+import { object, string } from "yup";
 
-export const validationSchema = yup.object().shape({
-  name: yup.string().required("Введите имя"),
-  comment: yup.string().required("Введите комментарий"),
+export const validationSchema = object().shape({
+  name: string().required("Введите имя"),
+  comment: string().required("Введите комментарий"),
 });

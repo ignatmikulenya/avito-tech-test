@@ -37,13 +37,14 @@ export default function Preview({ imageId }: Props) {
       comment: "",
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       if (preview) {
         preview.comments.push({
           id: Date.now(),
           date: Date.now(),
           text: values.comment,
         });
+        resetForm({ values: { name: "", comment: "" } });
       }
     },
   });
@@ -68,7 +69,7 @@ export default function Preview({ imageId }: Props) {
                   alt="Изображение галереи"
                   className="preview__image"
                 />
-                <form onSubmit={form.handleSubmit}>
+                <form autoComplete="off" onSubmit={form.handleSubmit}>
                   <Input
                     name="name"
                     placeholder="Ваше имя"
@@ -80,6 +81,7 @@ export default function Preview({ imageId }: Props) {
                       "name"
                     )}
                     onChange={form.handleChange}
+                    className="preview__input"
                   />
                   <Input
                     name="comment"
@@ -96,6 +98,7 @@ export default function Preview({ imageId }: Props) {
                       "comment"
                     )}
                     onChange={form.handleChange}
+                    className="preview__input"
                   />
                   <Button isLiquid type="submit">
                     Оставить комментарий

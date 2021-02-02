@@ -25,7 +25,7 @@ export default function Input({
   className,
 }: Props) {
   return (
-    <div className="form-field">
+    <div className={cn("form-field", className)}>
       <input
         id={id}
         name={name}
@@ -33,7 +33,7 @@ export default function Input({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={cn("form-field__field", className)}
+        className="form-field__field"
       />
       {helperText && (
         <p

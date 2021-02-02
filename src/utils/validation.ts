@@ -1,26 +1,27 @@
-import * as formik from "formik";
+import { getIn } from "formik";
+import type { FormikErrors, FormikTouched } from "formik";
 
 export function checkError<TForm>(
-  errors: formik.FormikErrors<TForm>,
+  errors: FormikErrors<TForm>,
   name: string | string[]
 ): boolean {
-  return !!formik.getIn(errors, name);
+  return !!getIn(errors, name);
 }
 
 export function checkInputError<TForm>(
-  touched: formik.FormikTouched<TForm>,
-  errors: formik.FormikErrors<TForm>,
+  touched: FormikTouched<TForm>,
+  errors: FormikErrors<TForm>,
   name: string | string[]
 ): boolean {
-  return checkError(errors, name) && !!formik.getIn(touched, name);
+  return checkError(errors, name) && !!getIn(touched, name);
 }
 
 export function getHelperText<TForm>(
-  errors: formik.FormikErrors<TForm>,
+  errors: FormikErrors<TForm>,
   name: string | string[],
   fallBack?: string
 ): string {
-  const error = formik.getIn(errors, name);
+  const error = getIn(errors, name);
 
   if (error) {
     return error;
@@ -30,12 +31,12 @@ export function getHelperText<TForm>(
 }
 
 export function getInputHelperText<TForm>(
-  touched: formik.FormikTouched<TForm>,
-  errors: formik.FormikErrors<TForm>,
+  touched: FormikTouched<TForm>,
+  errors: FormikErrors<TForm>,
   name: string | string[],
   fallBack?: string
 ): string {
-  const isTouched = formik.getIn(touched, name);
+  const isTouched = getIn(touched, name);
 
   if (isTouched) {
     return getHelperText<TForm>(errors, name, fallBack);
