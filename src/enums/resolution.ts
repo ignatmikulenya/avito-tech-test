@@ -1,4 +1,4 @@
 export enum Resolution {
-  Laptop,
-  Tablet,
+  Desktop,
+  Mobile,
 }

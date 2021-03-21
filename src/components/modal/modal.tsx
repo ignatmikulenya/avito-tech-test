@@ -19,7 +19,7 @@ export default function Modal({
               type="button"
               className="modal__close-button"
               onClick={onClose}
-            ></button>
+            />
             {children}
           </div>
         </div>,

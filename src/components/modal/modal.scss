@@ -28,7 +28,18 @@
 
   &__close-button {
     position: absolute;
-    right: 22px;
-    top: 22px;
+    right: 6px;
+    top: 6px;
+
+    width: 20px;
+    height: 20px;
+
+    border: none;
+
+    background-position: center center;
+    background-image: url("../../assets/images/close.svg");
+    background-color: transparent;
+
+    cursor: pointer;
   }
 }

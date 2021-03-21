@@ -1,1 +1,1 @@
-export const tabletPortrait = 768;
+export const TABLET_PARTRAIT = 768;

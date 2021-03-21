@@ -6,10 +6,10 @@ import { IPreview } from "../../../../api-interfaces";
 import { Button, Empty, Error, Loading, Input } from "../../../../components";
 
 import { imagesService } from "../../../../services";
-import { useFetch } from "../../../../hooks";
+import { useFetch, useResolution } from "../../../../hooks";
 import { checkInputError, getInputHelperText } from "../../../../utils";
 
-import { RequestStatus } from "../../../../enums";
+import { RequestStatus, Resolution } from "../../../../enums";
 
 import { Comments } from "./comments";
 import { validationSchema } from "./validation";
@@ -31,6 +31,8 @@ export default function Preview({ imageId }: Props) {
     fetchPreviewError,
   ] = useFetch<IPreview>(memoFetchPreview);
 
+  const resolution = useResolution();
+
   const form = useFormik({
     initialValues: {
       name: "",
@@ -39,9 +41,10 @@ export default function Preview({ imageId }: Props) {
     validationSchema,
     onSubmit: (values, { resetForm }) => {
       if (preview) {
+        const publishDate = Date.now();
         preview.comments.push({
-          id: Date.now(),
-          date: Date.now(),
+          id: publishDate,
+          date: publishDate,
           text: values.comment,
         });
         resetForm({ values: { name: "", comment: "" } });
@@ -63,12 +66,27 @@ export default function Preview({ imageId }: Props) {
         } else {
           return (
             <div className="preview">
-              <div>
+              {resolution === Resolution.Mobile && (
                 <img
                   src={preview.url}
                   alt="Изображение галереи"
                   className="preview__image"
                 />
+              )}
+              <div className="preview__content">
+                {resolution === Resolution.Desktop && (
+                  <img
+                    src={preview.url}
+                    alt="Изображение галереи"
+                    className="preview__image"
+                  />
+                )}
+                {resolution === Resolution.Mobile && (
+                  <Comments
+                    comments={preview.comments}
+                    className="preview__comments"
+                  />
+                )}
                 <form autoComplete="off" onSubmit={form.handleSubmit}>
                   <Input
                     name="name"
@@ -105,7 +123,12 @@ export default function Preview({ imageId }: Props) {
                   </Button>
                 </form>
               </div>
-              <Comments comments={preview.comments} />
+              {resolution === Resolution.Desktop && (
+                <Comments
+                  comments={preview.comments}
+                  className="preview__comments"
+                />
+              )}
             </div>
           );
         }
